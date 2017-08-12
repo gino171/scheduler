@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +26,7 @@ public class DweetUploadTask implements BTask {
 			dweetUpload(ds);
 
 		} catch (Exception ex) {
-			System.out.println(ex);
+			Logger.getLogger(DweetUploadTask.class.getName()).log(Level.SEVERE,ex.getMessage());
 		}
 	}
 
@@ -58,8 +60,8 @@ public class DweetUploadTask implements BTask {
 		}
 		in.close();
 
-		// printing result from response
-		System.out.println(responseCode+":"+response.toString());
+		Logger.getLogger (DweetUploadTask.class.getName()).log(Level.INFO, "Dweet upload to "+url.getPath()+" completed. Response Code ="+responseCode);
+		
 	}
 
 	@Override
